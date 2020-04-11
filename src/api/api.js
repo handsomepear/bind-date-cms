@@ -35,8 +35,24 @@ export const getHomeInfo = data => {
   })
 }
 
-// 获取总数据
 export const getAllData = data => {
+  return fetch({
+    url: '/proxy/admin/all',
+    data: {
+      data
+    }
+  })
+}
+
+export const getDayData = data => {
+  return fetch({
+    url: '/proxy/admin/everyday',
+    data
+  })
+}
+
+// 获取代理总数据
+export const getProxyAllData = data => {
   return fetch({
     url: '/proxy/home/all',
     data: {
@@ -45,8 +61,8 @@ export const getAllData = data => {
   })
 }
 
-// 获取每日数据
-export const getDayData = data => {
+// 获取代理每日数据
+export const getProxyDayData = data => {
   return fetch({
     url: '/proxy/home/everyday',
     data

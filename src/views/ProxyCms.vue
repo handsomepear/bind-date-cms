@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { getHomeInfo, getDayData, getAllData } from '../api/api'
+import { getHomeInfo, getProxyDayData, getProxyAllData } from '../api/api'
 import { formatDate } from '../utils/utils'
 export default {
   data() {
@@ -106,7 +106,7 @@ export default {
         return this.$message.error('请选择截止日期')
       }
       this.allLoading = true
-      getAllData({
+      getProxyAllData({
         id,
         startDate: formatDate(this.totalStartDate),
         endDate: formatDate(this.totalEndDate)
@@ -135,7 +135,7 @@ export default {
         return this.$message.error('请选择截止日期')
       }
       this.dayLoading = true
-      getDayData({
+      getProxyDayData({
         id,
         startDate: formatDate(this.everyDayStartDate),
         endDate: formatDate(this.everyDayEndDate)
@@ -155,7 +155,6 @@ export default {
       let timestamp = new Date().getTime()
       let name = this.qrBase64.substring(22, 30) + timestamp + '.png'
       this.downloadfilename = name
-      console.log(this.downloadfilename)
       this.$nextTick(() => {
         this.$refs.download.click()
       })

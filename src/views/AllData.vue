@@ -60,7 +60,6 @@ export default {
   methods: {
     // 查询数据
     searchAllData() {
-      const id = localStorage.getItem('id')
       if (!this.totalStartDate) {
         return this.$message.error('请选择起始日期')
       }
@@ -69,7 +68,6 @@ export default {
       }
       this.allLoading = true
       getAllData({
-        id,
         startDate: formatDate(this.totalStartDate),
         endDate: formatDate(this.totalEndDate)
       })
@@ -88,7 +86,6 @@ export default {
         })
     },
     searchDayData() {
-      const id = localStorage.getItem('id')
       if (!this.everyDayStartDate) {
         return this.$message.error('请选择起始日期')
       }
@@ -97,7 +94,6 @@ export default {
       }
       this.dayLoading = true
       getDayData({
-        id,
         startDate: formatDate(this.everyDayStartDate),
         endDate: formatDate(this.everyDayEndDate)
       })
