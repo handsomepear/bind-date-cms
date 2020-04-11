@@ -1,13 +1,16 @@
 <template>
   <div class="complain-page">
     <div class="table-container">
-      <el-table :data="complainData" border>
-        <el-table-column prop="name" label="用户昵称" width="100"> </el-table-column>
+      <el-table :data="complainData" border v-loading="loading">
+        <el-table-column prop="nickName" label="用户昵称" width="100"> </el-table-column>
         <el-table-column prop="reason" label="投诉原因" width="100"> </el-table-column>
-        <el-table-column prop="phone" label="电话号码" width="100"> </el-table-column>
-        <el-table-column fixed="right" label="处理状态" width="90">
+        <el-table-column prop="tel" label="电话号码" width="100"> </el-table-column>
+        <el-table-column prop="status" fixed="right" label="处理状态" width="90">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">处理</el-button>
+            <el-button v-if="scope.row.status === 0" @click="handleClick(scope.row)" type="text" size="small"
+              >处理</el-button
+            >
+            <span v-else style="font-size: 12px">已处理</span>
           </template>
         </el-table-column>
       </el-table>
@@ -16,31 +19,41 @@
 </template>
 
 <script>
+import { getAccuseList, accuseHandle } from '../api/api'
 export default {
   data() {
     return {
-      complainData: [
-        {
-          name: '1',
-          reason: '2',
-          phone: '3'
-        },
-        {
-          name: '1',
-          reason: '2',
-          phone: '3'
-        },
-        {
-          name: '1',
-          reason: '2',
-          phone: '3'
-        }
-      ]
+      complainData: [],
+      loading: false
     }
+  },
+  mounted() {
+    this.getAccuseList()
   },
   methods: {
     handleClick(row) {
-      console.log(row)
+      this.loadingInstance = this.$loading.service()
+      accuseHandle({
+        id: row.id
+      }).then(() => {
+        const index = this.complainData.findIndex(item => item.id === row.id)
+        this.complainData[index].status = 1
+        this.$nextTick(() => {
+          this.loadingInstance.close()
+          this.$message.success('处理成功')
+        })
+      })
+    },
+    getAccuseList() {
+      this.loading = true
+      getAccuseList()
+        .then(res => {
+          this.complainData = res.data.list
+          this.loading = false
+        })
+        .catch(() => {
+          this.loading = false
+        })
     }
   }
 }

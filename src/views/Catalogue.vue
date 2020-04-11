@@ -17,11 +17,19 @@ export default {
         },
         {
           name: '代理数据',
-          path: '/agency'
+          path: '/proxy-data'
+        },
+        {
+          name: '代理列表',
+          path: '/proxy-list'
         },
         {
           name: '新增代理',
-          path: '/addAgency'
+          path: '/add-proxy'
+        },
+        {
+          name: '代理后台',
+          path: '/proxy-cms'
         },
         {
           name: '投诉管理',
@@ -52,8 +60,8 @@ export default {
   justify-content: center;
   align-items: center;
   width: 300px;
-  height: 100px;
-  margin-top: 60px;
+  height: 80px;
+  margin-top: 30px;
   border: 1px solid #333;
 }
 </style>

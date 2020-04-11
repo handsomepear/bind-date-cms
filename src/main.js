@@ -2,8 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import '@/assets/css/reset.less'
-import { Button, Form, FormItem, Input, Table, TableColumn, DatePicker, Divider } from 'element-ui'
-
+import { Button, Form, FormItem, Input, Table, TableColumn, DatePicker, Divider, Message, Loading } from 'element-ui'
+import Clipboard from 'vue-clipboard2'
+Vue.use(Clipboard)
 Vue.use(Button)
   .use(Form)
   .use(FormItem)
@@ -12,7 +13,10 @@ Vue.use(Button)
   .use(TableColumn)
   .use(DatePicker)
   .use(Divider)
+  .use(Loading)
 
+Vue.prototype.$message = Message
+Vue.prototype.$loading = Loading
 Vue.config.productionTip = false
 
 new Vue({

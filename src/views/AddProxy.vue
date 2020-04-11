@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { addProxy } from '../api/api'
 export default {
   data() {
     return {
@@ -55,9 +56,19 @@ export default {
         this.addProxy()
       })
     },
-    addProxy() {}
+    addProxy() {
+      const proxyForm = this.proxyForm
+      addProxy({
+        name: proxyForm.name,
+        tel: proxyForm.phone,
+        vx: proxyForm.vx,
+        aliPay: proxyForm.alipay
+      }).then(res => {
+        this.$message.success('添加代理成功')
+        this.proxyForm.id = res.data.id
+        this.$router.go(-1)
+      })
+    }
   }
 }
 </script>
-
-<style scoped></style>

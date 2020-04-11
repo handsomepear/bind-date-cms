@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { changePass } from '../api/api'
 export default {
   data() {
     const validateConfirmPass = (rule, value, cb) => {
@@ -53,6 +54,12 @@ export default {
       })
     },
     changePass() {
+      const id = localStorage.getItem('id')
+      changePass({
+        id,
+        oldPassword: this.changeForm.prevPassword,
+        newPassword: this.changeForm.curPassword
+      })
       // 修改密码
       this.$router.back()
     }

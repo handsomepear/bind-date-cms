@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { login } from '../api/api'
 export default {
   data() {
     return {
@@ -39,7 +40,16 @@ export default {
     },
     doLogin() {
       // 登录逻辑
-      this.$router.replace({ path: '' })
+      const loginForm = this.loginForm
+      login({
+        tel: loginForm.phone,
+        password: loginForm.password
+      }).then(res => {
+        localStorage.setItem('id', res.data.proxy.id)
+        // expire 7天
+        localStorage.setItem('expire', new Date().getTime() + 604800000)
+        this.$router.replace({ path: '/catalogue' })
+      })
     }
   }
 }
