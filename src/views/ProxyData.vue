@@ -8,14 +8,14 @@
         </div>
       </div>
       <el-divider />
-      <el-table :data="proxyData" border style="width: 100%" v-loading="loading">
+      <el-table stripe :data="proxyData" border style="width: 100%" v-loading="loading">
         <el-table-column prop="name" label="代理名称" width="90"> </el-table-column>
-        <el-table-column prop="userCount" label="用户数" width="60"> </el-table-column>
-        <el-table-column prop="postCount" label="相亲帖数" width="60"> </el-table-column>
-        <el-table-column prop="payCount" label="支付金额" width="60"> </el-table-column>
-        <el-table-column prop="receiveCount" label="被支付金额" width="60"> </el-table-column>
-        <el-table-column prop="profit" label="分成金额" width="60"> </el-table-column>
-        <el-table-column fixed="right" label="操作" width="90">
+        <el-table-column prop="userCount" label="用户数" width="90"> </el-table-column>
+        <el-table-column prop="postCount" label="相亲帖数" width="90"> </el-table-column>
+        <el-table-column prop="payCount" label="支付金额" width="90"> </el-table-column>
+        <el-table-column prop="receiveCount" label="被支付金额" width="100"> </el-table-column>
+        <el-table-column prop="profit" label="分成金额" width="90"> </el-table-column>
+        <el-table-column label="操作" width="90">
           <template slot-scope="scope">
             <el-button v-if="!scope.row.hasSettlement" @click="handleClick(scope.row)" type="text" size="small"
               >结算</el-button

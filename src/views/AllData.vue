@@ -11,7 +11,7 @@
         </div>
       </div>
       <el-divider />
-      <el-table :data="totalData" border v-loading="allLoading">
+      <el-table stripe :data="totalData" border v-loading="allLoading">
         <el-table-column prop="userCount" label="总用户人数"> </el-table-column>
         <el-table-column prop="postCount" label="总相亲帖数"> </el-table-column>
         <el-table-column prop="profit" label="总支付金额"> </el-table-column>
@@ -28,12 +28,12 @@
         </div>
       </div>
       <el-divider />
-      <el-table :data="everyDayData" border height="300" v-loading="dayLoading">
+      <el-table stripe :data="everyDayData" border height="300" v-loading="dayLoading">
         <el-table-column prop="date" label="日期" width="100"> </el-table-column>
-        <el-table-column prop="userCount" label="用户数"> </el-table-column>
-        <el-table-column prop="postCount" label="相亲帖数"> </el-table-column>
-        <el-table-column prop="payCount" label="支付笔数"> </el-table-column>
-        <el-table-column prop="profit" label="支付金额"> </el-table-column>
+        <el-table-column prop="userCount" label="用户数" width="100"> </el-table-column>
+        <el-table-column prop="postCount" label="相亲帖数" width="100"> </el-table-column>
+        <el-table-column prop="payCount" label="支付笔数" width="100"> </el-table-column>
+        <el-table-column prop="profit" label="支付金额" width="100"> </el-table-column>
       </el-table>
     </section>
   </div>

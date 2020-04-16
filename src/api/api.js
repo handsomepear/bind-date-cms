@@ -38,9 +38,7 @@ export const getHomeInfo = data => {
 export const getAllData = data => {
   return fetch({
     url: '/proxy/admin/all',
-    data: {
-      data
-    }
+    data
   })
 }
 
@@ -81,7 +79,7 @@ export const changePass = data => {
 // 获取代理列表
 export const getProxyList = () => {
   return fetch({
-    url: ' /proxy/list'
+    url: '/proxy/list'
   })
 }
 

@@ -1,11 +1,11 @@
 <template>
   <div class="complain-page">
     <div class="table-container">
-      <el-table :data="complainData" border v-loading="loading">
-        <el-table-column prop="nickName" label="用户昵称" width="100"> </el-table-column>
-        <el-table-column prop="reason" label="投诉原因" width="100"> </el-table-column>
-        <el-table-column prop="tel" label="电话号码" width="100"> </el-table-column>
-        <el-table-column prop="status" fixed="right" label="处理状态" width="90">
+      <el-table stripe :data="complainData" border v-loading="loading">
+        <el-table-column prop="nickName" label="用户昵称" width="110"> </el-table-column>
+        <el-table-column prop="reason" label="投诉原因" width="120"> </el-table-column>
+        <el-table-column prop="tel" label="电话号码" width="110"> </el-table-column>
+        <el-table-column prop="status" label="处理状态" width="110">
           <template slot-scope="scope">
             <el-button v-if="scope.row.status === 0" @click="handleClick(scope.row)" type="text" size="small"
               >处理</el-button

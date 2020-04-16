@@ -6,11 +6,11 @@
         <el-button @click="goAddProxy">新增代理</el-button>
       </div>
       <el-divider />
-      <el-table :data="list" border style="width: 100%">
-        <el-table-column prop="name" label="代理名称"> </el-table-column>
-        <el-table-column prop="tel" label="联系方式"> </el-table-column>
-        <el-table-column prop="createDate" label="创建日期"> </el-table-column>
-        <el-table-column fixed="right" label="操作" width="80">
+      <el-table stripe :data="list" border style="width: 100%">
+        <el-table-column prop="name" label="代理名称" width="110"> </el-table-column>
+        <el-table-column prop="tel" label="联系方式" width="110"> </el-table-column>
+        <el-table-column prop="createDate" label="创建日期" width="110"> </el-table-column>
+        <el-table-column label="操作" width="90">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="viewDetail(scope.row)">详情</el-button>
           </template>

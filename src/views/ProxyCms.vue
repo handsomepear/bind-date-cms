@@ -12,11 +12,11 @@
         </div>
       </div>
       <el-divider />
-      <el-table :data="totalData" border v-loading="allLoading">
-        <el-table-column prop="userCount" label="总用户人数"> </el-table-column>
-        <el-table-column prop="postCount" label="总相亲帖数"> </el-table-column>
-        <el-table-column prop="profit" label="总收益"> </el-table-column>
-        <el-table-column prop="needSettlement" label="未结算余额"> </el-table-column>
+      <el-table stripe :data="totalData" border v-loading="allLoading">
+        <el-table-column prop="userCount" label="总用户人数" width="110"> </el-table-column>
+        <el-table-column prop="postCount" label="总相亲帖数" width="110"> </el-table-column>
+        <el-table-column prop="profit" label="总收益" width="110"> </el-table-column>
+        <el-table-column prop="needSettlement" label="未结算余额" width="110"> </el-table-column>
       </el-table>
     </section>
     <section class="table-container">
@@ -30,13 +30,13 @@
         </div>
       </div>
       <el-divider />
-      <el-table :data="everyDayData" border height="300" v-loading="dayLoading">
-        <el-table-column prop="date" label="日期" width="100"> </el-table-column>
-        <el-table-column prop="userCount" label="用户数"> </el-table-column>
-        <el-table-column prop="postCount" label="相亲帖数"> </el-table-column>
-        <el-table-column prop="payCount" label="支付金额"> </el-table-column>
-        <el-table-column prop="receiveCount" label="被支付金额"> </el-table-column>
-        <el-table-column prop="profit" label="当日收益"> </el-table-column>
+      <el-table stripe :data="everyDayData" border height="300" v-loading="dayLoading">
+        <el-table-column prop="date" label="日期" width="110"> </el-table-column>
+        <el-table-column prop="userCount" label="用户数" width="100"> </el-table-column>
+        <el-table-column prop="postCount" label="相亲帖数" width="100"> </el-table-column>
+        <el-table-column prop="payCount" label="支付金额" width="100"> </el-table-column>
+        <el-table-column prop="receiveCount" label="被支付金额" width="100"> </el-table-column>
+        <el-table-column prop="profit" label="当日收益" width="100"> </el-table-column>
       </el-table>
     </section>
     <section class="mine-link">
@@ -77,11 +77,6 @@ export default {
       everyDayData: []
     }
   },
-  watch: {
-    totalStartDate: (newVal, oldVal) => {
-      console.log(newVal, oldVal)
-    }
-  },
   mounted() {
     this.getHomeData()
   },
@@ -91,7 +86,6 @@ export default {
       getHomeInfo({
         id
       }).then(res => {
-        console.log(res.data)
         this.url = res.data.url
         this.qrBase64 = 'data:image/png;base64,' + res.data.qrBase64
       })

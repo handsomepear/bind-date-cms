@@ -48,7 +48,7 @@
         <h3>结算记录</h3>
       </div>
       <el-divider />
-      <el-table :data="settlementList" border style="width: 100%">
+      <el-table stripe :data="settlementList" border style="width: 100%">
         <el-table-column prop="month" label="结算周期"> </el-table-column>
         <el-table-column prop="date" label="结算日期"> </el-table-column>
         <el-table-column prop="money" label="结算日金额"> </el-table-column>
@@ -85,7 +85,6 @@ export default {
         id: id
       })
         .then(res => {
-          console.log(res)
           this.proxy = res.data.data
           this.proxy.qrBase64 = 'data:image/png;base64,' + this.proxy.qrBase64
           this.settlementList = res.settlementList
