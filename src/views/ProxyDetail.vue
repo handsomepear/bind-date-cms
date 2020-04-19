@@ -38,7 +38,8 @@
             <div class="qr-code">
               <img :src="proxy.qrBase64" alt="" />
             </div>
-            <el-button size="small" @click="downLoadImage">下载</el-button>
+            <!-- <el-button size="small" @click="downLoadImage">下载</el-button> -->
+            <div>(长按保存二维码)</div>
           </div>
         </div>
       </div>

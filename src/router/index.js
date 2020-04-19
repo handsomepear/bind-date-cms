@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import routeList from './routes'
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,72 +20,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
+    path: '/catalogue',
+    name: 'Catalogue',
+    meta: {
+      title: '目录'
+    },
+    component: () => import(/* webpackChunkName: "catalogue" */ '../views/Catalogue.vue')
+  },
+  {
     path: '/change-pass',
     name: 'ChangePass',
     meta: {
       title: '更改密码'
     },
     component: () => import(/* webpackChunkName: "changePass" */ '../views/ChangePass.vue')
-  },
-
-  {
-    path: '/catalogue',
-    name: 'Catalogue',
-    meta: {
-      title: '相亲后台'
-    },
-    component: () => import(/* webpackChunkName: "catalogue" */ '../views/Catalogue.vue')
-  },
-  {
-    path: '/all-data',
-    name: 'AllData',
-
-    meta: {
-      title: '总数据',
-      keepAlive: true
-    },
-    component: () => import(/* webpackChunkName: "AllData" */ '../views/AllData.vue')
-  },
-  {
-    path: '/proxy-data',
-    name: 'ProxyData',
-    meta: {
-      title: '代理数据',
-      keepAlive: true
-    },
-    component: () => import(/* webpackChunkName: "ProxyData" */ '../views/ProxyData.vue')
-  },
-  {
-    path: '/proxy-detail',
-    name: 'ProxyDetail',
-    meta: {
-      title: '代理详情'
-    },
-    component: () => import(/* webpackChunkName: "ProxyDetail" */ '../views/ProxyDetail.vue')
-  },
-  {
-    path: '/proxy-list',
-    name: 'ProxyList',
-    meta: {
-      title: '代理列表'
-    },
-    component: () => import(/* webpackChunkName: "ProxyList" */ '../views/ProxyList.vue')
-  },
-  {
-    path: '/add-proxy',
-    name: 'AddProxy',
-    meta: {
-      title: '新增代理'
-    },
-    component: () => import(/* webpackChunkName: "AddProxy" */ '../views/AddProxy.vue')
-  },
-  {
-    path: '/complain',
-    name: 'Complain',
-    meta: {
-      title: '投诉管理'
-    },
-    component: () => import(/* webpackChunkName: "Complain" */ '../views/Complain.vue')
   },
   {
     path: '/proxy-cms',
@@ -94,6 +42,10 @@ const routes = [
       title: '代理后台'
     },
     component: () => import(/* webpackChunkName: "ProxyCms" */ '../views/ProxyCms.vue')
+  },
+  {
+    path: '*',
+    component: () => import(/* webpackChunkName: "ProxyCms" */ '../views/404.vue')
   }
 ]
 
@@ -101,10 +53,14 @@ const router = new VueRouter({
   routes
 })
 
+if (localStorage.getItem('god')) {
+  router.addRoutes(routeList)
+}
+
 router.beforeEach((to, from, next) => {
   const id = localStorage.getItem('id')
   const expire = localStorage.getItem('expire')
-  document.title = to.meta.title
+  document.title = to.meta.title || '后台'
   if (to.path === '/login') {
     return next()
   }

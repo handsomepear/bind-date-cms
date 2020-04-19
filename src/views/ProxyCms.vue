@@ -3,7 +3,12 @@
   <div class="all-data-page">
     <section class="table-container">
       <div class="tabel-top">
-        <h3>总数据</h3>
+        <div class="header">
+          <h3>总数据</h3>
+          <el-select v-model="proxyId" placeholder="请选择" size="small" v-if="isShowSelect">
+            <el-option v-for="item in proxyList" :key="item.id" :label="item.name" :value="item.id"> </el-option>
+          </el-select>
+        </div>
         <div class="table-date-picker">
           <el-date-picker v-model="totalStartDate" type="date" placeholder="开始时间" />
           <span style="margin: 0 2%">至</span>
@@ -40,15 +45,15 @@
       </el-table>
     </section>
     <section class="mine-link">
-      <div class="link">
-        我的代理链接：<span>{{ url }}</span>
+      <div class="link" v-if="url">
+        代理链接：<span>{{ url }}</span>
         <el-button size="small" v-clipboard:copy="url" v-clipboard:success="urlCopySuccess">复制</el-button>
       </div>
-      <div class="qr-code">
-        我的代理二维码：
+      <div class="qr-code" v-if="qrBase64">
+        代理二维码：
         <div>
           <img :src="qrBase64" alt="" />
-          <el-button size="small" @click="downLoadImage">下载</el-button>
+          <div>(长按保存二维码)</div>
         </div>
       </div>
     </section>
@@ -57,7 +62,7 @@
 </template>
 
 <script>
-import { getHomeInfo, getProxyDayData, getProxyAllData } from '../api/api'
+import { getHomeInfo, getProxyDayData, getProxyAllData, getProxyList } from '../api/api'
 import { formatDate } from '../utils/utils'
 export default {
   data() {
@@ -68,21 +73,41 @@ export default {
       everyDayEndDate: '',
       allLoading: false,
       dayLoading: false,
-      url: '',
-      qrBase64: '',
+      url: '213',
+      qrBase64: ' 123',
       downloadfilename: '',
       // 总数据
       totalData: [],
       // 每天数据
-      everyDayData: []
+      everyDayData: [],
+      proxyList: [],
+      proxyId: '',
+      isShowSelect: false
+    }
+  },
+  watch: {
+    proxyId() {
+      if (this.totalStartDate && this.totalEndDate) {
+        this.searchAllData()
+      }
+      if (this.everyDayStartDate && this.everyDayEndDate) {
+        this.searchDayData()
+      }
+      this.getHomeData()
     }
   },
   mounted() {
-    this.getHomeData()
+    const god = localStorage.getItem('god')
+    if (god) {
+      this.getProxyList()
+      this.isShowSelect = true
+    } else {
+      this.getHomeData()
+    }
   },
   methods: {
     getHomeData() {
-      const id = localStorage.getItem('id')
+      const id = this.proxyId || localStorage.getItem('id')
       getHomeInfo({
         id
       }).then(res => {
@@ -90,9 +115,15 @@ export default {
         this.qrBase64 = 'data:image/png;base64,' + res.data.qrBase64
       })
     },
+    // 获取代理列表
+    getProxyList() {
+      getProxyList().then(res => {
+        this.proxyList = res.data.list
+      })
+    },
     // 查询数据
     searchAllData() {
-      const id = localStorage.getItem('id')
+      const id = this.proxyId || localStorage.getItem('id')
       if (!this.totalStartDate) {
         return this.$message.error('请选择起始日期')
       }
@@ -121,7 +152,7 @@ export default {
         })
     },
     searchDayData() {
-      const id = localStorage.getItem('id')
+      const id = this.proxyId || localStorage.getItem('id')
       if (!this.everyDayStartDate) {
         return this.$message.error('请选择起始日期')
       }
@@ -158,6 +189,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+}
 .mine-link {
   font-size: 14px;
   padding: 10px 10px 100px;

@@ -16,6 +16,8 @@
 
 <script>
 import { login } from '../api/api'
+
+import routeList from '../router/routes'
 export default {
   data() {
     return {
@@ -48,7 +50,14 @@ export default {
         localStorage.setItem('id', res.data.proxy.id)
         // expire 7天
         localStorage.setItem('expire', new Date().getTime() + 604800000)
-        this.$router.replace({ path: '/catalogue' })
+        /* 如果是超级用户则展示全部 否则则只展示代理后台 */
+        if (res.data.god) {
+          localStorage.setItem('god', true)
+        }
+        this.$router.addRoutes(routeList)
+        setTimeout(() => {
+          this.$router.replace({ path: '/catalogue' })
+        }, 300)
       })
     }
   }
