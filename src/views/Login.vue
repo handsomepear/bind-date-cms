@@ -51,7 +51,7 @@ export default {
         // expire 7天
         localStorage.setItem('expire', new Date().getTime() + 604800000)
         /* 如果是超级用户则展示全部 否则则只展示代理后台 */
-        if (res.data.god) {
+        if (res.data.proxy.god) {
           localStorage.setItem('god', true)
         }
         this.$router.addRoutes(routeList)
