@@ -53,19 +53,18 @@ const router = new VueRouter({
   routes
 })
 
-if (localStorage.getItem('god')) {
+if (sessionStorage.getItem('god')) {
   router.addRoutes(routeList)
 }
 
 router.beforeEach((to, from, next) => {
-  const id = localStorage.getItem('id')
-  const expire = localStorage.getItem('expire')
+  const id = sessionStorage.getItem('id')
   document.title = to.meta.title || '后台'
   if (to.path === '/login') {
     return next()
   }
-  if (!id || expire < new Date().getTime()) {
-    localStorage.clear()
+  if (!id) {
+    sessionStorage.clear()
     return next({ path: '/login' })
   }
   next()

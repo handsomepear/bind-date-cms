@@ -47,7 +47,7 @@ export default {
     }
   },
   mounted() {
-    const god = localStorage.getItem('god')
+    const god = sessionStorage.getItem('god')
     if (god) {
       this.catalogueList = catalogueList
     } else {

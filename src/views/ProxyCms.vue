@@ -97,7 +97,7 @@ export default {
     }
   },
   mounted() {
-    const god = localStorage.getItem('god')
+    const god = sessionStorage.getItem('god')
     if (god) {
       this.getProxyList()
       this.isShowSelect = true
@@ -107,7 +107,7 @@ export default {
   },
   methods: {
     getHomeData() {
-      const id = this.proxyId || localStorage.getItem('id')
+      const id = this.proxyId || sessionStorage.getItem('id')
       getHomeInfo({
         id
       }).then(res => {
@@ -123,7 +123,7 @@ export default {
     },
     // 查询数据
     searchAllData() {
-      const id = this.proxyId || localStorage.getItem('id')
+      const id = this.proxyId || sessionStorage.getItem('id')
       if (!this.totalStartDate) {
         return this.$message.error('请选择起始日期')
       }
@@ -152,7 +152,7 @@ export default {
         })
     },
     searchDayData() {
-      const id = this.proxyId || localStorage.getItem('id')
+      const id = this.proxyId || sessionStorage.getItem('id')
       if (!this.everyDayStartDate) {
         return this.$message.error('请选择起始日期')
       }

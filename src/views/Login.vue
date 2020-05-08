@@ -47,14 +47,10 @@ export default {
         tel: loginForm.phone,
         password: loginForm.password
       }).then(res => {
-        localStorage.setItem('id', res.data.proxy.id)
-        // expire 7天
-        localStorage.setItem('expire', new Date().getTime() + 604800000)
+        sessionStorage.setItem('id', res.data.proxy.id)
         /* 如果是超级用户则展示全部 否则则只展示代理后台 */
         if (res.data.proxy.god) {
-          localStorage.setItem('god', true)
-        } else {
-          localStorage.removeItem('god')
+          sessionStorage.setItem('god', true)
         }
         this.$router.addRoutes(routeList)
         setTimeout(() => {

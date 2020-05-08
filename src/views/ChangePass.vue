@@ -46,7 +46,6 @@ export default {
   methods: {
     changeSubmit(formName) {
       this.$refs[formName].validate(valid => {
-        console.log(valid)
         if (!valid) {
           return false
         }
@@ -54,7 +53,7 @@ export default {
       })
     },
     changePass() {
-      const id = localStorage.getItem('id')
+      const id = sessionStorage.getItem('id')
       changePass({
         id,
         oldPassword: this.changeForm.prevPassword,
