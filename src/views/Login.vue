@@ -53,6 +53,8 @@ export default {
         /* 如果是超级用户则展示全部 否则则只展示代理后台 */
         if (res.data.proxy.god) {
           localStorage.setItem('god', true)
+        } else {
+          localStorage.removeItem('god')
         }
         this.$router.addRoutes(routeList)
         setTimeout(() => {
