@@ -56,6 +56,7 @@
           <div>(长按保存二维码)</div>
         </div>
       </div>
+      <el-button type="danger" size="medium" @click="goChangePass">修改密码</el-button>
     </section>
     <a ref="download" v-show="false" :href="this.qrBase64" :download="downloadfilename"></a>
   </div>
@@ -73,8 +74,8 @@ export default {
       everyDayEndDate: '',
       allLoading: false,
       dayLoading: false,
-      url: '213',
-      qrBase64: ' 123',
+      url: '',
+      qrBase64: '',
       downloadfilename: '',
       // 总数据
       totalData: [],
@@ -183,6 +184,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.download.click()
       })
+    },
+    goChangePass() {
+      this.$router.push({ path: '/change-pass' })
     }
   }
 }

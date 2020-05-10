@@ -53,9 +53,7 @@ export const getDayData = data => {
 export const getProxyAllData = data => {
   return fetch({
     url: '/proxy/home/all',
-    data: {
-      data
-    }
+    data
   })
 }
 

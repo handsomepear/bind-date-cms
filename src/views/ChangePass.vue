@@ -54,13 +54,22 @@ export default {
     },
     changePass() {
       const id = sessionStorage.getItem('id')
+      const _this = this
       changePass({
         id,
         oldPassword: this.changeForm.prevPassword,
         newPassword: this.changeForm.curPassword
+      }).then(() => {
+        // 修改密码
+        this.$message({
+          message: '密码修改成功',
+          type: 'success',
+          duration: 2000,
+          onClose() {
+            _this.$router.back()
+          }
+        })
       })
-      // 修改密码
-      this.$router.back()
     }
   }
 }

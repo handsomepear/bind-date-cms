@@ -63,7 +63,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     return next()
   }
-  if (!id) {
+  if (!id && to.path !== '/change-pass') {
     sessionStorage.clear()
     return next({ path: '/login' })
   }
