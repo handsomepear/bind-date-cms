@@ -29,9 +29,7 @@ export const getProxyDetail = data => {
 export const getHomeInfo = data => {
   return fetch({
     url: '/proxy/home',
-    data: {
-      data
-    }
+    data
   })
 }
 
