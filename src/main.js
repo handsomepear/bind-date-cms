@@ -14,7 +14,8 @@ import {
   Message,
   Loading,
   Select,
-  Option
+  Option,
+  MessageBox
 } from 'element-ui'
 import Clipboard from 'vue-clipboard2'
 Vue.use(Clipboard)
@@ -31,6 +32,7 @@ Vue.use(Button)
   .use(Option)
 
 Vue.prototype.$message = Message
+Vue.prototype.$messageBox = MessageBox
 Vue.prototype.$loading = Loading
 Vue.config.productionTip = false
 

@@ -49,5 +49,13 @@ export default [
       title: '投诉管理'
     },
     component: () => import(/* webpackChunkName: "Complain" */ '../views/Complain.vue')
+  },
+  {
+    path: '/delete',
+    name: 'Delete',
+    meta: {
+      title: '删帖'
+    },
+    component: () => import(/* webpackChunkName: " Delete" */ '../views/Delete.vue')
   }
 ]

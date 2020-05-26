@@ -37,6 +37,11 @@ const catalogueList = [
     name: '投诉管理',
     path: '/complain',
     auth: true
+  },
+  {
+    name: '删帖',
+    path: '/delete',
+    auth: true
   }
 ]
 export default {

@@ -109,3 +109,19 @@ export const accuseHandle = data => {
     data
   })
 }
+
+// 帖子列表
+export const getPostList = data => {
+  return fetch({
+    url: '/back/post/list',
+    data
+  })
+}
+
+// 帖子删除
+export const deletePost = data => {
+  return fetch({
+    url: '/back/post/delete',
+    data
+  })
+}

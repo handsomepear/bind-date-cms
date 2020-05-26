@@ -48,6 +48,7 @@ export default {
         password: loginForm.password
       }).then(res => {
         sessionStorage.setItem('id', res.data.proxy.id)
+        sessionStorage.setItem('tel', res.data.proxy.tel)
         /* 如果是超级用户则展示全部 否则则只展示代理后台 */
         if (res.data.proxy.god) {
           sessionStorage.setItem('god', true)
